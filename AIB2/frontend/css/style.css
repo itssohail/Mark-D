@@ -1,0 +1,602 @@
+/* Theme Colors */
+:root {
+    --bs-primary-rgb: 13, 110, 253;
+    --bs-body-bg-rgb: 255, 255, 255;
+    --bs-body-color-rgb: 33, 37, 41;
+    --card-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --card-radius: 16px;
+    --transition-speed: 0.3s;
+    --navbar-height: 64px;
+}
+
+[data-bs-theme="dark"] {
+    --bs-body-bg-rgb: 33, 37, 41;
+    --bs-body-color-rgb: 255, 255, 255;
+    --card-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    --card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Global Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    line-height: 1.5;
+    transition: background-color var(--transition-speed) ease;
+}
+
+/* Navigation */
+.navbar {
+    height: var(--navbar-height);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(var(--bs-body-bg-rgb), 0.8) !important;
+    border-bottom: 1px solid rgba(var(--bs-body-color-rgb), 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: var(--bs-primary);
+}
+
+.navbar-brand i {
+    font-size: 1.5rem;
+}
+
+/* Search Bar */
+.search-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 1rem;
+}
+
+.search-wrapper .input-group {
+    background: rgba(var(--bs-body-color-rgb), 0.05);
+    border-radius: 12px;
+    padding: 0.25rem;
+}
+
+.search-wrapper .form-control {
+    font-size: 0.9375rem;
+    height: 40px;
+    background: transparent;
+}
+
+.search-wrapper .form-control:focus {
+    box-shadow: none;
+}
+
+.search-wrapper .input-group-text {
+    color: var(--bs-secondary-color);
+    padding-left: 1rem;
+}
+
+/* Bookmark Cards */
+.bookmark-card {
+    position: relative;
+    border-radius: var(--card-radius);
+    background: var(--bs-body-bg);
+    box-shadow: var(--card-shadow);
+    transition: box-shadow var(--transition-speed) ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.bookmark-card:hover {
+    box-shadow: var(--card-shadow-hover);
+}
+
+.bookmark-link {
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bookmark-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all var(--transition-speed) ease;
+    z-index: 2;
+}
+
+.bookmark-card:hover .bookmark-actions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(var(--bs-body-bg-rgb), 0.9);
+    border: none;
+    color: var(--bs-body-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: all var(--transition-speed) ease;
+}
+
+.action-btn:hover {
+    background: var(--bs-primary);
+    color: white;
+    transform: scale(1.1);
+}
+
+.action-btn.delete-btn:hover {
+    background: var(--bs-danger);
+}
+
+.bookmark-preview {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(var(--bs-body-color-rgb), 0.05);
+    transition: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookmark-preview::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.bookmark-card:hover .bookmark-preview::after {
+    opacity: 1;
+}
+
+.bookmark-favicon-large {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    background: rgba(var(--bs-body-bg-rgb), 0.9);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.bookmark-favicon-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bookmark-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: var(--bs-secondary-color);
+}
+
+.bookmark-meta > span {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.bookmark-meta i {
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+.bookmark-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bookmark-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.75rem;
+    color: var(--bs-emphasis-color);
+    line-height: 1.3;
+}
+
+.bookmark-url {
+    font-size: 0.875rem;
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.bookmark-card:hover .bookmark-url {
+    opacity: 1;
+}
+
+.bookmark-description {
+    font-size: 0.9375rem;
+    color: var(--bs-secondary-color);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* Tags */
+.bookmark-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary);
+    text-decoration: none;
+    transition: all var(--transition-speed) ease;
+}
+
+.tag:hover, .tag.active {
+    background: var(--bs-primary);
+    color: white;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--bs-secondary-color);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, var(--bs-primary), #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+/* Add Button */
+.navbar .btn-primary {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 1.25rem;
+    transition: transform var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar .btn-primary:hover {
+    transform: scale(1.1);
+}
+
+/* Modal */
+.modal-content {
+    border-radius: var(--card-radius);
+    border: none;
+    box-shadow: var(--card-shadow-hover);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(var(--bs-body-color-rgb), 0.1);
+    padding: 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(var(--bs-body-color-rgb), 0.1);
+    padding: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bookmark-card {
+        margin-bottom: 1rem;
+    }
+    
+    .navbar .btn-primary {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    
+    .btn-add-floating {
+        bottom: 1.5rem;
+        left: 1.5rem;
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+    }
+
+    .search-wrapper {
+        max-width: none;
+        margin: 0 0.5rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bookmark-card {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    color: var(--bs-secondary-color);
+    font-size: 0.875rem;
+}
+
+.theme-toggle .form-check-input {
+    cursor: pointer;
+    width: 2.5rem;
+    height: 1.25rem;
+    margin: 0 0.5rem;
+    background-image: none;
+    transition: background-color var(--transition-speed) ease;
+}
+
+/* Filter Section */
+.filter-section {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 24px;
+}
+
+.filter-section .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+/* Add Bookmark Button */
+.btn {
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-primary {
+    background: var(--bs-primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: rgba(var(--bs-primary-rgb), 0.9);
+    transform: translateY(-1px);
+}
+
+/* Modal */
+.modal {
+    border-radius: 12px;
+    max-width: 500px;
+}
+
+.modal .modal-content {
+    padding: 24px;
+}
+
+.modal h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .container {
+        width: 100%;
+    }
+    
+    .bookmark-preview {
+        height: 180px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    .bookmark-preview {
+        height: 160px;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Floating Add Button */
+.btn-add-floating {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--bs-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 16px rgba(var(--bs-primary-rgb), 0.3);
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    z-index: 1040;
+}
+
+.btn-add-floating:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 6px 24px rgba(var(--bs-primary-rgb), 0.4);
+}
+
+/* Profile Section */
+.profile-section {
+    margin-left: 1rem;
+}
+
+.profile-button {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 12px;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.profile-button:hover {
+    background-color: rgba(var(--bs-body-color-rgb), 0.05);
+}
+
+.profile-name {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-align: right;
+}
+
+.profile-email {
+    font-size: 0.8125rem;
+    opacity: 0.7;
+    text-align: right;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(var(--bs-primary-rgb), 0.2);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Dropdown Menu Improvements */
+.dropdown-menu {
+    border-radius: 12px;
+    border: none;
+    box-shadow: var(--card-shadow-hover);
+    padding: 0.5rem;
+}
+
+.dropdown-item {
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary);
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: rgba(var(--bs-danger-rgb), 0.1);
+}
+
+/* Toast Improvements */
+.toast {
+    border-radius: 12px;
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* Button Improvements */
+.btn {
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-primary {
+    background: var(--bs-primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: rgba(var(--bs-primary-rgb), 0.9);
+    transform: translateY(-1px);
+} 
